@@ -112,19 +112,39 @@ def pokedex(low=1, high=5):
     
     id = low
     tallest_pokemon = 0
-    while id < high:
-        url = f"https://pokeapi.co/api/v2/pokemon/{id}"
+    pokemon_format = {"name":"x", "weight":"y", "height":"z"}
+
+
+    while low < high:
+
+        url = f"https://pokeapi.co/api/v2/pokemon/{low}"
         r = requests.get(url)
-        if r.status_code == 200:
-            url = json.loads(r.text)
-        pokemon_height = url["height"]
-        if pokemon_height > tallest_pokemon:
-            tallest_pokemon = pokemon_height
-            pokemon_name = url["forms"][0]["name"]
-            pokemon_weight =  url["weight"]
-            return f"name: {pokemon_name}", f"weight:{pokemon_weight}", f"height: {pokemon_height}"
-        else:
-            id + 1 
+
+        if r.status_code is 200:
+            json_data = json.loads(r.text)
+            # pokemon_height = url["height"]
+
+        name = json_data.get("name")
+        weight = json_data.get("weight")
+        height = json_data.get("height")
+
+        if height > tallest_pokemon:
+            tallest_pokemon = height
+            pokemon_format.update({"name": name, "weight": weight, "height": height})
+        
+        low += 1
+        # if pokemon_height > tallest_pokemon:
+        #     tallest_pokemon = pokemon_height
+        #     pokemon_name = url["forms"][0]["name"]
+        #     pokemon_weight =  url["weight"]
+        # else:
+        #     id + 1 
+    
+    return {
+        "name": pokemon_format.get("name"),
+        "weight": pokemon_format.get("weight"),
+        "height": pokemon_format.get("height")
+    }
 
 
 
