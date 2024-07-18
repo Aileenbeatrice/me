@@ -1,6 +1,5 @@
 """All about IO."""
 
-
 import json
 import os
 import requests
@@ -39,7 +38,12 @@ def get_some_details():
     """
     json_data = open(LOCAL + "/lazyduck.json").read()
     data = json.loads(json_data)
-    return {"lastName": data["results"][0]["name"]["last"], "password": data["results"][0]["login"]["password"], "postcodePlusID": int(data['results'][0]['location']['postcode']) + int(data['results'][0]['id']['value'])}
+    return {
+        "lastName": data["results"][0]["name"]["last"],
+        "password": data["results"][0]["login"]["password"],
+        "postcodePlusID": int(data["results"][0]["location"]["postcode"])
+        + int(data["results"][0]["id"]["value"]),
+    }
 
 
 def wordy_pyramid():
@@ -76,20 +80,22 @@ def wordy_pyramid():
     ]
     TIP: to add an argument to a URL, use: ?argName=argVal e.g. &wordlength=
     """
-    pyramid = [] #initialize the list first outside of the loop
+    pyramid = []  # initialize the list first outside of the loop
 
     for i in range(3, 20, 2):
         url = f"https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength={i}"
-        r = requests.get(url) #requests comes from "import requests" in the top of the file
-        if r.status_code == 200: #200 indicates the the code is successful
-            word = r.text 
+        r = requests.get(
+            url
+        )  # requests comes from "import requests" in the top of the file
+        if r.status_code == 200:  # 200 indicates the the code is successful
+            word = r.text
             pyramid.append(word)
 
     for i in range(20, 3, -2):
         url = f"https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength={i}"
-        r = requests.get(url) 
-        if r.status_code == 200: 
-            word = r.text 
+        r = requests.get(url)
+        if r.status_code == 200:
+            word = r.text
             pyramid.append(word)
 
     return pyramid
@@ -109,11 +115,10 @@ def pokedex(low=1, high=5):
          get very long. If you are accessing a thing often, assign it to a
          variable and then future access will be easier.
     """
-    
+
     id = low
     tallest_pokemon = 0
-    pokemon_format = {"name":"x", "weight":"y", "height":"z"}
-
+    pokemon_format = {"name": "x", "weight": "y", "height": "z"}
 
     while low < high:
 
@@ -122,7 +127,6 @@ def pokedex(low=1, high=5):
 
         if r.status_code is 200:
             json_data = json.loads(r.text)
-            # pokemon_height = url["height"]
 
         name = json_data.get("name")
         weight = json_data.get("weight")
@@ -131,24 +135,14 @@ def pokedex(low=1, high=5):
         if height > tallest_pokemon:
             tallest_pokemon = height
             pokemon_format.update({"name": name, "weight": weight, "height": height})
-        
+
         low += 1
-        # if pokemon_height > tallest_pokemon:
-        #     tallest_pokemon = pokemon_height
-        #     pokemon_name = url["forms"][0]["name"]
-        #     pokemon_weight =  url["weight"]
-        # else:
-        #     id + 1 
-    
+
     return {
         "name": pokemon_format.get("name"),
         "weight": pokemon_format.get("weight"),
-        "height": pokemon_format.get("height")
+        "height": pokemon_format.get("height"),
     }
-
-
-
-
 
 
 def diarist():
@@ -169,7 +163,7 @@ def diarist():
     NOTE: this function doesn't return anything. It has the _side effect_ of modifying the file system
     """
     file_path = f"set4/lasers.pew"
-    with open(file_path, 'w') as file:
+    with open(file_path, "w") as file:
         laser_num = str(6)
         file.write(laser_num)
     pass
