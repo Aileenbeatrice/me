@@ -59,7 +59,7 @@ def dictionary_please() -> dict:
 def is_it_5(some_number) -> bool:
     """Returns True if the argument passed is 5, otherwise returns False."""
     well_is_it = 5
-    if some_number == 5:
+    if some_number == well_is_it:
         return True
     else:
         return False
@@ -123,6 +123,16 @@ def fizz_buzz() -> list:
          'FizzBuzz', 16, 17, ...]
     """
     fizz_buzz_list = []
+    for i in range(1, 101):
+        if i % 5 == 0 and i % 3 == 0:
+            fizz_buzz_list.append("FizzBuzz")
+        elif i % 5 == 0:
+            fizz_buzz_list.append("Buzz")
+        elif i % 3 == 0:
+            fizz_buzz_list.append("Fizz")
+        else:
+            fizz_buzz_list.append(i)
+    return fizz_buzz_list
 
 
 def set_it_on_fire(input_string="very naughty boy") -> str:
@@ -136,8 +146,9 @@ def set_it_on_fire(input_string="very naughty boy") -> str:
     TIP: consider using the 'join' method in Python.
     TIP: make sure that you have a 🔥 on both ends of the string.
     """
-
-    return None
+    upper = input_string.upper()
+    on_fire = "🔥" + "🔥".join(upper) + "🔥"
+    return on_fire
 
 
 def the_chain_gang_5(the_value) -> bool:
@@ -150,8 +161,7 @@ def the_chain_gang_5(the_value) -> bool:
     TIP: you've already written a function that returns True if the value is 5
     TIP: you've already written a function that subtracts 5
     """
-
-    return None
+    return is_it_5(take_five(the_value))
 
 
 def pet_filter(letter="a") -> list:
