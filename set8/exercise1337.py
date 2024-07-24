@@ -267,8 +267,6 @@ def random_filler_text(number_of_words=200) -> str:
         words.append(word)
     return " ".join(words)
 
-import os
-import json
 
 def fast_filler(number_of_words=200) -> str:
     """Makes filler text, but really fast.
@@ -288,53 +286,21 @@ def fast_filler(number_of_words=200) -> str:
 
     fname = "dict_cache.json"
     if os.path.exists(fname):
-        with open(fname, 'r') as file: 
+        with open(fname, "r") as file:
             dictionary = json.load(file)
-    else: 
+    else:
         dictionary = make_filler_text_dictionary()
-        with open(fname, 'w') as file:
+        with open(fname, "w") as file:
             json.dump(dictionary, file)
-        
-    filler = ''
+
+    words = []
     for _ in range(number_of_words):
         word = random.choice(list(dictionary.keys()))
-        filler += word + ' '
-    filler = filler.upper() + '.'
+        words.append(word)
+        filler = " ".join(words)
+    filler = filler.capitalize() + "."
     return filler
 
-
-def make_filler_text_dictionary():
-    # This function should return a dictionary of words
-    # For this example, we'll just use a simple API to get a list of words
-    response = requests.get('https://random-word-api.herokuapp.com/word?number=100')
-    words = response.json()
-    dictionary = {word: True for word in words}
-    return dictionary
-
-def fast_filler(number_of_words=200) -> str:
-    fname = "dict_cache.json"
-
-    # Check if the file exists
-    if os.path.exists(fname):
-        # If it does, load the dictionary from the file
-        with open(fname, 'r') as f:
-            dictionary = json.load(f)
-    else:
-        # If it doesn't, get the dictionary from the internet
-        dictionary = make_filler_text_dictionary()
-        # Save the dictionary to the file
-        with open(fname, 'w') as f:
-            json.dump(dictionary, f)
-
-    # Make the filler text
-    filler_text = ''
-    for _ in range(number_of_words):
-        word = random.choice(list(dictionary.keys()))
-        filler_text += word + '
-    # Capitalize the first letter and add a full stop
-    filler_text = filler_text.capitalize() + '.'
-
-    return filler_text
 
 if __name__ == "__main__":
     print("give_me_five", give_me_five(), type(give_me_five()))
