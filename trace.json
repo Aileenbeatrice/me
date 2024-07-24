@@ -360,7 +360,7 @@
   "7",
   {
     "of_total": 38,
-    "mark": 34,
+    "mark": 35,
     "results": [
       {
         "value": 1,
@@ -500,19 +500,19 @@
       },
       {
         "value": 0,
-        "name": "\nfast_filler:\n    given:    [100]\n    expected: True\n    got:      'list' object has no attribute 'capitalize'"
+        "name": "\nfast_filler:\n    given:    100\n    expected: True\n    got:      False"
       },
       {
         "value": 0,
-        "name": "\nfast_filler:\n    given:    [10]\n    expected: True\n    got:      'list' object has no attribute 'capitalize'"
+        "name": "\nfast_filler:\n    given:    10\n    expected: True\n    got:      False"
+      },
+      {
+        "value": 1,
+        "name": "\nfast_filler:\n    given:    10\n    expected: True\n    got:      True"
       },
       {
         "value": 0,
-        "name": "\nfast_filler:\n    given:    [10]\n    expected: True\n    got:      'list' object has no attribute 'capitalize'"
-      },
-      {
-        "value": 0,
-        "name": "subsequent fast_filler failed: 'list' object has no attribute 'capitalize'"
+        "name": "Timed out trying to run fast filler 10 times in 1 second, subsequent fast_filler probably wasn't fast enoughFunction <lambda> (args=()) (kwargs={}) timed out after 1.000000 seconds.\n"
       }
     ],
     "week_number": 8
