@@ -179,7 +179,9 @@ def pet_filter(letter="a") -> list:
     ]
     # fmt: on
     filtered = []
-
+    for i in pets:
+        if letter in i:
+            filtered.append(i)
     return filtered
 
 
@@ -195,7 +197,16 @@ def best_letter_for_pets() -> str:
 
     the_alphabet = string.ascii_lowercase
     most_popular_letter = ""
+    long_pets = 0
+    index = 0
 
+    while index < len(the_alphabet):
+        letter = the_alphabet[index]
+        pet_alphabet = pet_filter(letter)
+        if len(pet_alphabet) > long_pets:
+            long_pets = len(pet_alphabet)
+            most_popular_letter = letter
+        index += 1
     return most_popular_letter
 
 
@@ -224,9 +235,14 @@ def make_filler_text_dictionary() -> dict:
     TIP: you'll need the requests library
     """
 
-    url = "https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength="
     wd = {}
-
+    for value in range(3, 8):
+        words = []
+        for _ in range(4):
+            url = f"https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength={value}"
+            r = requests.get(url)
+            words.append(r.text)
+        wd[value] = words
     return wd
 
 
@@ -242,11 +258,17 @@ def random_filler_text(number_of_words=200) -> str:
     """
 
     my_dict = make_filler_text_dictionary()
-
     words = []
 
+    for _ in range(number_of_words):
+        length = random.randint(4, 5)
+        list = my_dict[length]
+        word = random.choice(list)
+        words.append(word)
     return " ".join(words)
 
+import os
+import json
 
 def fast_filler(number_of_words=200) -> str:
     """Makes filler text, but really fast.
@@ -265,9 +287,54 @@ def fast_filler(number_of_words=200) -> str:
     """
 
     fname = "dict_cache.json"
+    if os.path.exists(fname):
+        with open(fname, 'r') as file: 
+            dictionary = json.load(file)
+    else: 
+        dictionary = make_filler_text_dictionary()
+        with open(fname, 'w') as file:
+            json.dump(dictionary, file)
+        
+    filler = ''
+    for _ in range(number_of_words):
+        word = random.choice(list(dictionary.keys()))
+        filler += word 
+    filler = filler.upper() + '.'
+    return filler
 
-    return None
 
+def make_filler_text_dictionary():
+    # This function should return a dictionary of words
+    # For this example, we'll just use a simple API to get a list of words
+    response = requests.get('https://random-word-api.herokuapp.com/word?number=100')
+    words = response.json()
+    dictionary = {word: True for word in words}
+    return dictionary
+
+def fast_filler(number_of_words=200) -> str:
+    fname = "dict_cache.json"
+
+    # Check if the file exists
+    if os.path.exists(fname):
+        # If it does, load the dictionary from the file
+        with open(fname, 'r') as f:
+            dictionary = json.load(f)
+    else:
+        # If it doesn't, get the dictionary from the internet
+        dictionary = make_filler_text_dictionary()
+        # Save the dictionary to the file
+        with open(fname, 'w') as f:
+            json.dump(dictionary, f)
+
+    # Make the filler text
+    filler_text = ''
+    for _ in range(number_of_words):
+        word = random.choice(list(dictionary.keys()))
+        filler_text += word + '
+    # Capitalize the first letter and add a full stop
+    filler_text = filler_text.capitalize() + '.'
+
+    return filler_text
 
 if __name__ == "__main__":
     print("give_me_five", give_me_five(), type(give_me_five()))
