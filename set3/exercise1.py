@@ -20,7 +20,7 @@ def loop_ranger(start, stop=None, step=1):
     list = []
     i = start
     while i < stop:
-        list.append (i)
+        list.append(i)
         i += step
     return list
 
@@ -34,8 +34,8 @@ def two_step_ranger(start, stop):
     You can either reuse loop_ranger, or the range function that in the standard library
     """
     list = []
-    for i in range(start,stop,2):
-        list.append (i)
+    for i in range(start, stop, 2):
+        list.append(i)
     return list
 
 
@@ -50,11 +50,11 @@ def stubborn_asker(low, high):
     while True:
         i = int(input("Enter a number: "))
         if low < i < high:
-            print (f"This number is between {low} and {high}")
+            print(f"This number is between {low} and {high}")
             break
         else:
-            print (f"This number is not between {low} and {high}, Try Again!")
-    return i 
+            print(f"This number is not between {low} and {high}, Try Again!")
+    return i
 
 
 def not_number_rejector(message):
@@ -67,11 +67,10 @@ def not_number_rejector(message):
     while True:
         try:
             number = int(input("Enter a number: "))
-            print ("This is a number!")
+            print("This is a number!")
             return "Yay you got it!"
         except ValueError:
-            print ("Invalid, try again!")
-        
+            print("Invalid, try again!")
 
 
 def super_asker(low, high):
@@ -84,12 +83,12 @@ def super_asker(low, high):
         try:
             number = int(input("Enter a number: "))
             if low < number < high:
-                print (f"This number is between {low} and {high}")
+                print(f"This number is between {low} and {high}")
                 return "Yay you got it!"
             else:
-                print (f"This number is not between {low} and {high}, Try Again!")
+                print(f"This number is not between {low} and {high}, Try Again!")
         except ValueError:
-            print ("Invalid, try again!")
+            print("Invalid, try again!")
 
 
 if __name__ == "__main__":
