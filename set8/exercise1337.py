@@ -52,17 +52,22 @@ def string_list_please() -> list[str]:
 
 def dictionary_please() -> dict:
     """Returns a dictionary, anything you like."""
-    
-    return 
+    my_dict = {"flour": "cake"}
+    return my_dict
+
 
 def is_it_5(some_number) -> bool:
     """Returns True if the argument passed is 5, otherwise returns False."""
-        return well_is_it
+    well_is_it = 5
+    if some_number == 5:
+        return True
+    else:
+        return False
 
 
 def take_five(some_number) -> int:
     """Subtracts 5 from some_number."""
-    subtract = some_number - 5
+    subtract = some_number - int(5)
     return subtract
 
 
@@ -72,7 +77,8 @@ def greet(name="Towering Timmy") -> str:
     E.g. if given as "Towering Timmy" it should
          return "Well hello, Towering Timmy"
     """
-    return None
+    greetings = f"Well hello, {name}"
+    return greetings
 
 
 def one_counter(input_list=[1, 4, 1, 5, 1, 1]) -> int:
@@ -80,8 +86,10 @@ def one_counter(input_list=[1, 4, 1, 5, 1, 1]) -> int:
     Return an integer.
     TIP: the test will use a different input_list, so don't just return 2
     """
-    count = None
-
+    count = 0
+    for int in input_list:
+        if int == 1:
+            count += 1
     return count
 
 
@@ -89,8 +97,10 @@ def n_counter(search_for_this, input_list=[1, 4, 1, 5, 1, 1]) -> int:
     """Count the number of times search_for_this shows up in the input_list.
     Return an integer.
     """
-    count = None
-
+    count = 0
+    for int in input_list:
+        if int == search_for_this:
+            count += 1
     return count
 
 
@@ -113,9 +123,6 @@ def fizz_buzz() -> list:
          'FizzBuzz', 16, 17, ...]
     """
     fizz_buzz_list = []
-    # your code here
-
-    return fizz_buzz_list
 
 
 def set_it_on_fire(input_string="very naughty boy") -> str:
