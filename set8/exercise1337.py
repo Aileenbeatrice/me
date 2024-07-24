@@ -298,7 +298,7 @@ def fast_filler(number_of_words=200) -> str:
     filler = ''
     for _ in range(number_of_words):
         word = random.choice(list(dictionary.keys()))
-        filler += word 
+        filler += word + ' '
     filler = filler.upper() + '.'
     return filler
 
