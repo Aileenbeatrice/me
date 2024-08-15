@@ -1,1 +1,1 @@
-TODO: Reflect on what you learned this week and what is still unclear.
+This week, we continued doing set 4. I continued to finish and test my codes to make sure it works correctly. Aside from that, I opened my dataset and looked at the columns and rows that I am working with. I had to do background research on lakes and water qualities to understand what high and low values for specific columns meant. I decided to do this first before diving into the pandas notebook so that I can understand what I have to graph and what I am investigating.

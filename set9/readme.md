@@ -1,1 +1,2 @@
-TODO: Reflect on what you learned this week and what is still unclear.
+After implementing maps to my data project, I moved on to further connect the relations of my data to each other. I made a function
+to code all of the line graphs for each column of my data set based on the lakes they were connected to. Thus, they all generated together, and I was able to observe how the values changed throughout the years for each lakes and create correlations to the question I am investigating. Through this correlations, I could experiment with more graph types to better fit what I wanted to explain.
